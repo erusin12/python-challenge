@@ -11,7 +11,9 @@ output_file = os.path.join("analysis", "analysis.txt")
 with open(budget_data_csv, 'r') as csvfile, open(output_file, 'w') as outfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     outfile.write("Financial Analysis\n")
+    print("Financial Analysis\n")
     outfile.write("---------------------------------\n")
+    print("---------------------------------\n")
    # Skip the header row
     next(csvreader)
     # Create a set to store unique months
@@ -25,6 +27,7 @@ with open(budget_data_csv, 'r') as csvfile, open(output_file, 'w') as outfile:
     # Count the number of unique months
     num_months = len(months)
     outfile.write(f"Total Months: {num_months}\n")
+    print(f"Total Months: {num_months}\n")
 
     # Re-open the CSV file to iterate over it again
     csvfile.seek(0)
@@ -32,7 +35,7 @@ with open(budget_data_csv, 'r') as csvfile, open(output_file, 'w') as outfile:
 
     # Initialize variables to store the previous value and the total change
     prev_value = None
-    total = 0 # add a variable to store the total
+    total = 0 
     total_change = 0
     num_changes = 0
     max_increase = None
@@ -67,19 +70,17 @@ with open(budget_data_csv, 'r') as csvfile, open(output_file, 'w') as outfile:
 
     # Write the total to the output file
     outfile.write(f"Total: ${total}\n")
+    print(f"Total: ${total}\n")
 
     # Calculate the average change, or print a message if there were no changes
     if num_changes > 0:
         avg_change = total_change / num_changes
         outfile.write(f"Average Change: ${avg_change:.2f}\n")
-    else:
-        outfile.write("There were no changes in the column.\n")
+        print(f"Average Change: ${avg_change:.2f}\n")
     if max_increase_row is not None:
         outfile.write(f"Greatest Increase in Profits: {max_increase_row[0]} (${max_increase:.0f})\n")
-    else:
-        outfile.write("There were no changes in the column.\n")
+        print(f"Greatest Increase in Profits: {max_increase_row[0]} (${max_increase:.0f})\n")
     if max_decrease_row is not None:
         outfile.write(f"Greatest Decrease in Profits: {max_decrease_row[0]} (${max_decrease:.0f})\n")
-    else:
-        outfile.write("There were no changes in the column.\n")
+        print(f"Greatest Decrease in Profits: {max_decrease_row[0]} (${max_decrease:.0f})\n")
         
